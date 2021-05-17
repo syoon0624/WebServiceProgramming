@@ -1,56 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
+
 <html>
 
 <head>
-    <title>윤동주 - 자화상</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <title>yoon's Blog</title>
 </head>
 
 <body>
-    <header>
-        <h1>자화상 - 윤동주</h1>
-    </header>
-    <hr size="10" align="left" width=100% noshade="noshade"></hr>
-    <section>
-        <center>
-            <h1>&#60; 자화상 &#62;</h1>
-            <h1><u>윤동주</u></h1>
-        </center>
-        <hr align="center" width=50%>
-        </hr>
-    </section>
-    <br>
-    <br>
-    산모퉁이를 돌아 논가 외딴 우물을 홀로 찾아가선 가만히 들여다봅니다.<br><br>
-    우물 속에는 달이 밝고 구름이 흐르고 하늘이 펼치고 파아란 바람이 불고 가을이 있습니다.<br><br>
-    그리고 한 사나이가 있습니다.<br><br>
-    어쩐지 그 사나이가 미워져 돌아갑니다.<br><br>
-    돌아가다 생각하니 그 사나이가 가엾어집니다. 도로 가 들여다보니 사나이는 그대로 있습니다.<br><br>
-    다시 그 사나이가 미워져 돌아갑니다.<br><br>
-    돌아가다 생각하니 그 사나이가 그리워집니다.<br><br>
-    우물 속에는 달이 밝고 구름이 흐르고 하늘이 펼치고 파아란 바람이 불고 가을이 있고 추억처럼 사나이가
-    있습니다.<br><br>
-
-    <aside>
-        <h2>윤동주시인의 다른 시</h2>
-        <ul>
-            <li>서시</li>
-            <li>자화상</li>
-            <li>눈오는 지도</li>
-            <li>새로운 길</li>
-            <li>길</li>
-            <li>별 헤는 밤</li>
-            <li>쉽게 씌어진 시</li>
-            <li>참회록</li>
-            <li>못 자는 밤</li>
-            <li>비오는 밤</li>
-            <li>소낙 비</li>
-        </ul>
-        </article>
-    </aside>
-    <footer>
-        <hr align="center" width=100%>
-        ©웹서비스프로그래밍®2021
-    </footer>
+    <div class="page-header">
+        <a href="" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+        <h1><a href="/">Yoons Blog</a></h1>
+        <img src="static/image.png"/>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% for post in posts %}
+                <div class="post">
+                    <div class="date">
+                        <p>published: {{ post.published_date }}</p>
+                    </div>
+                    <h1><a href="">{{ post.title }}</a></h1>
+                    <p>{{ post.text|linebreaksbr }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-8">
+                <video src= "static/video.mp4" controls autoplay>동영상 재생 실패</video>
+            </div>
+        </div>
+        
+    </div>
 </body>
 
 </html>
