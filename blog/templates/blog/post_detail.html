@@ -33,7 +33,29 @@
       </div>
     </div>
   </div>
+  
   </div>
+
+  {% for comment in post.comments.all %}
+    {% if user.is_authenticated or comment.approved_comment %}
+    <div class="comment">
+        <div class="date">
+            {{ comment.created_date }}
+            {% if comment.approved_comment %}
+                <a class="btn btn" href="{% url 'comment_remove' pk=comment.pk %}">삭제</a>
+                <a class="btn btn" href="{% url 'comment_approve' pk=comment.pk %}">??</a>
+            {% endif %}
+        </div>
+        <strong>{{ comment.author }}</strong>
+        <p>{{ comment.text|linebreaks }}</p>
+    </div>
+    {% endif %}
+  {% empty %}
+      <p>No comments here yet :(</p>
+  {% endfor %}
+
+  <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+
 
   <div style="text-align: right;margin-top: 20px;">
     <a class="btn btn-danger" style="margin-right: 10px; color: white;"  data-toggle="modal" data-target="#delete_modal">삭제하기</a>
