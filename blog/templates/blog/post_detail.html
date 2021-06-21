@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
   {% block content %}
-  <div>
+  <!-- 글 본문 -->
+<div>
   <div class="card" style="box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.4);">
     <div class="card-header" style="background-color: #e7f5ff;">
       <strong>{{ post.title }}</strong>
@@ -32,38 +33,103 @@
         {{ post.text|linebreaksbr}}
       </div>
     </div>
+      <div style="text-align: right;margin: 20px;">
+        <a class="btn btn-danger" style="margin-right: 10px; color: white;" data-toggle="modal"
+          data-target="#delete_modal">삭제하기</a>
+        <a class="btn btn-dark" style="color: white;" href="{% url 'post_list' %}">목록으로</a>
+      </div>
   </div>
+
+</div>
   
+  <!-- 댓글 목록 -->
+  <div id="commentList" style="margin-top: 30px; margin-bottom: 30px;">
+    <div class="card">
+
+      <div class="card-header" id="headingOne" style="background-color: #f06595;">
+        <h5 class="mb-0">
+          <button class="btn btn-default" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+            aria-controls="collapseOne">
+            <strong style="color: white;">댓글 보기</strong>
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#commentList">
+        <div class="card-body">
+          {% for comment in post.comments.all %}
+            {% if user == post.author %}
+            <div style="margin: 10px;">
+              <div class="date" style="margin-top: 10px; margin-bottom: 10px;">
+                {% if comment.approved_comment %}
+                <a class="btn btn-primary" href="{% url 'comment_approve' pk=comment.pk %}">댓글 숨김 on</a>
+                <a class="btn btn-danger" href="{% url 'comment_remove' pk=comment.pk %}">삭제</a>
+                {% else %}
+                <a class="btn btn-primary" href="{% url 'comment_approve' pk=comment.pk %}">댓글 숨김 off</a>
+                <a class="btn btn-danger" href="{% url 'comment_remove' pk=comment.pk %}">삭제</a>
+                {% endif %}
+              </div>
+              {% endif %}
+
+              {% if comment.approved_comment %}
+              <div style="border: 2px solid #f783ac; padding: 20px; border-radius: 5px;">
+                <div style="display: flex; justify-content: space-between;">
+                  <text>작성자: <strong> {{ comment.author }}</strong></text>
+                  <text style="color: #868e96;">작성일: {{ comment.created_date }}</text>
+                </div>
+                <hr />
+                <p>{{ comment.text|linebreaks }}</p>
+              </div>
+            </div>
+            {% endif %}
+
+            {% empty %}
+            <p>댓글이없어요! 댓글을 추가해주세요!</p>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  {% for comment in post.comments.all %}
-    {% if user.is_authenticated or comment.approved_comment %}
-    <div class="comment">
-        <div class="date">
-            {{ comment.created_date }}
-            {% if comment.approved_comment %}
-                <a class="btn btn" href="{% url 'comment_remove' pk=comment.pk %}">삭제</a>
-                <a class="btn btn" href="{% url 'comment_approve' pk=comment.pk %}">??</a>
-            {% endif %}
+  <!-- 댓글 작성 -->
+  <div id="comment" style="margin-bottom: 30px;" class="container">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-default" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <strong>댓글 작성하기</strong>
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#comment">
+        <div class="card-body">
+          <form method="POST" action="{% url 'add_comment_to_post' pk=post.pk %}" class="post-form">{% csrf_token %}
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">작성자</span>
+              </div>
+              <input type="text" class="form-control" name="author" placeholder="Username" aria-label="Username"
+                aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">댓 글</span>
+              </div>
+              <textarea class="form-control" aria-label="With textarea" name="text"></textarea>
+            </div>
+            <div style="text-align: right; margin-top: 10px;">
+              <button type="submit" class="btn btn-success">댓글 작성</button>
+            </div>
+          </form>
         </div>
-        <strong>{{ comment.author }}</strong>
-        <p>{{ comment.text|linebreaks }}</p>
+      </div>
     </div>
-    {% endif %}
-  {% empty %}
-      <p>No comments here yet :(</p>
-  {% endfor %}
-
-  <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
-
-
-  <div style="text-align: right;margin-top: 20px;">
-    <a class="btn btn-danger" style="margin-right: 10px; color: white;"  data-toggle="modal" data-target="#delete_modal">삭제하기</a>
-    <a class="btn btn-dark" style="color: white;" href="{% url 'post_list' %}">목록으로</a>
   </div>
 
   {% for message in messages %}
-    <div class="alert alert-warning alert-dismissible fade show col-md-10" role="alert" style="position: fixed; top:3%;">
+    <div class="alert alert-warning alert-dismissible fade show col-md-10" role="alert" style="position: fixed; top:3%; left: 7%">
       <strong>{{ message }}</strong>
       <button type="button" class="close" data-dismiss="alert" aria-label="close">
         <span aria-hidden="true">&times;</span>
