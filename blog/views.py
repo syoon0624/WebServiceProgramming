@@ -35,7 +35,6 @@ def post_new(request):
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form })
 
-@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -60,7 +59,6 @@ def post_edit(request, pk):
             messages.error(request, "본인 게시글이 아닙니다.")
     return redirect('post_detail', pk=post.pk)
 
-@login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if(post.author == request.user):
@@ -70,7 +68,6 @@ def post_remove(request, pk):
         messages.error(request, "본인 게시글이 아닙니다.")
         return redirect('post_detail', pk=post.pk)
 
-@login_required
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
