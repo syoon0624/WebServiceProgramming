@@ -18,6 +18,11 @@
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
   <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
+<style>
+  div.page-header{
+    background-image: url("{% static 'background.png' %}");
+  }
+</style>
 
 <body>
   {% if user.is_authenticated %}
@@ -44,7 +49,7 @@
   {% endif %}
   <div>
     <div class="page-header">
-      <div class="container-fluid" style="background-color: #a5d8ff; padding: 22px; background-image: url('../static/background.png');">
+      <div class="container-fluid" style=" padding: 22px;">
         <div class="navbar-brand" style="float: left;">
           <a href="/" class="nav-link" style="color: black;">
             <h1>Yoon's Blog</h1>
