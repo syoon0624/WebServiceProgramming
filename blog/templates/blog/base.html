@@ -21,7 +21,7 @@
 
 <body>
   {% if user.is_authenticated %}
-    <ul class="nav" style="background-color: #868e96;">
+    <ul class="nav" style="background-color: black;">
       <li class="nav-item">
           <a class="nav-link" style="color: white;"> 반가워요, {{ user.username }} 님! </a>
       </li>
@@ -33,7 +33,7 @@
         {% csrf_token %} <input type="hidden" />
     </form>
   {% else %}
-    <ul class="nav" style="background-color: #868e96;">
+    <ul class="nav" style="background-color: black;">
       <li class="nav-item">
         <a class="nav-link" style="color: white;" href="{% url 'signup' %}">회원가입</a>
       </li>
@@ -44,7 +44,7 @@
   {% endif %}
   <div>
     <div class="page-header">
-      <div class="container-fluid" style="background-color: #a5d8ff; padding: 22px;">
+      <div class="container-fluid" style="background-color: #a5d8ff; padding: 22px; background-image: url('../static/background.png');">
         <div class="navbar-brand" style="float: left;">
           <a href="/" class="nav-link" style="color: black;">
             <h1>Yoon's Blog</h1>
@@ -67,18 +67,18 @@
           </div>
         </nav>
       </div>
-              <hr style=" border: 2px solid #4263eb" />
     </div>
   </div>
+  <hr style=" border: 2px solid #4263eb" />
   {% block login %}
   {% endblock %}
+  <div>
   <div class="content container">
     <div class="row">
-      <div class="col-md-11">
         {% block content %}
         {% endblock%}
-      </div>
     </div>
+  </div>
   </div>
 </body>
 

@@ -1,30 +1,71 @@
 {% extends 'blog/base.html' %}
   {% block content %}
-    <div class="post">
+  <div class="card" style="box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.4);">
+    <div class="card-header" style="background-color: #e7f5ff;">
+      <strong>{{ post.title }}</strong>
+      <br>
       {% if post.published_date%}
-        <div class="date"> 
-          {{post.published_date}}
-        </div>
+      <span style="color: #868e96;">
+        {{post.published_date}}
+      </span>
       {% endif %}
-      <a href="{% url 'post_edit' pk=post.pk %}" style="color: black; position:absolute; right: 5%;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil-square"
-        viewBox="0 0 16 16">
-        <path
-          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-        <path fill-rule="evenodd"
-          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-      </svg></a>
-      <a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}">삭제하기</a>
-      <a href="{% url 'post_list' %}">뒤로가기</a>
-      <h1>{{ post.title}}</h1>
-      <h3>작성자: {{ post.author}}</h1>
-      <p>{{ post.text|linebreaksbr}}</p>
-      {% for message in messages %}
-      <div class="alert alert-warning alert-dismissible fade show col-md-10" role="alert" style="position: fixed; top:3%;">
-        <strong>{{ message }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% endfor %}
+      <a href="{% url 'post_edit' pk=post.pk %}" style="color: black; position:absolute; right: 1%; top:2%;"><svg
+          xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil-square"
+          viewBox="0 0 16 16">
+          <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+          <path fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+        </svg></a>
     </div>
+    <div class="card-body">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill"
+          viewBox="0 0 16 16">
+          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+        </svg>
+        <span>작성자 : {{ post.author }}</span>
+        <hr/>
+      </div>
+      <div>
+        {{ post.text|linebreaksbr}}
+      </div>
+    </div>
+  </div>
+  
+  <div style="text-align: right;margin-top: 20px;">
+    <a class="btn btn-danger" style="margin-right: 10px; color: white;"  data-toggle="modal" data-target="#delete_modal">삭제하기</a>
+    <a class="btn btn-dark" style="color: white;" href="{% url 'post_list' %}">목록으로</a>
+  </div>
+
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show col-md-10" role="alert" style="position: fixed; top:3%;">
+      <strong>{{ message }}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endfor %}
+
+
+  <div id="delete_modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">삭제경고</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>게시글을 삭제하시겠습니까?</p>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-dark" href="{% url 'post_remove' pk=post.pk %}">삭제하기</a>
+          <button type="button" class="btn btn-light" data-dismiss="modal">취소하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
   {% endblock%}
