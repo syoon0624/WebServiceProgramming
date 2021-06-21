@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
   {% block content %}
+  <div>
   <div class="card" style="box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.4);">
     <div class="card-header" style="background-color: #e7f5ff;">
       <strong>{{ post.title }}</strong>
@@ -32,7 +33,8 @@
       </div>
     </div>
   </div>
-  
+  </div>
+
   <div style="text-align: right;margin-top: 20px;">
     <a class="btn btn-danger" style="margin-right: 10px; color: white;"  data-toggle="modal" data-target="#delete_modal">삭제하기</a>
     <a class="btn btn-dark" style="color: white;" href="{% url 'post_list' %}">목록으로</a>
