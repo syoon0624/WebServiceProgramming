@@ -4,6 +4,9 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .forms import PostForm
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -17,6 +20,7 @@ def main_page(request):
     m_views = 'hello'
     return render(request, 'blog/main_page.html', {'views': m_views})
 
+@login_required
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -28,26 +32,42 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form })
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
+        # 사용권한 - 작성자만 이용 가능
+        if(post.author == request.user):
+            form = PostForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                post.published_date = timezone.now()
+                post.save()
+                return redirect('post_detail', pk=post.pk)
+            return render(request, 'blog/post_edit.html', {'form': form })
+        else:
+            messages.error(request, "본인 게시글이 아닙니다.")
             return redirect('post_detail', pk=post.pk)
     else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+        if(post.author == request.user):
+            form = PostForm(instance=post)
+            return render(request, 'blog/post_edit.html', {'form': form })
+        else:
+            messages.error(request, "본인 게시글이 아닙니다.")
+    return redirect('post_detail', pk=post.pk)
 
+@login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    post.delete()
-    return redirect('post_list')
+    if(post.author == request.user):
+        post.delete()
+        return redirect('post_list')
+    else:
+        messages.error(request, "본인 게시글이 아닙니다.")
+        return redirect('post_detail', pk=post.pk)
 
 
 def signup(request):

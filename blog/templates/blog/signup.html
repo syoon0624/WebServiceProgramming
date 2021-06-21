@@ -7,7 +7,7 @@
         <h3 class="panel-title">회원가입</h3>
       </div>
       <div class="panel-body">
-        <form role="form" action="{% url 'login' %}" id="join_form" method="post">
+        <form role="form" action="{% url 'signup' %}" id="join_form" method="post">
           {% csrf_token %}
           <fieldset>
             <div class="w-100" style="padding-left: 5%; padding-right: 5%; margin-top: 10px;">
@@ -36,8 +36,7 @@
       $('#join_form').submit(function () {
         var $usernameInput = $('#join_form input[name=username]');
         var $passwordInput = $('#join_form input[name=password]');
-        var $passwordInput2 = $('#join_form input[name=password2]');
-        var $displayname = $('#join_form input[name=displayname]');
+        var $passwordInput2 = $('#join_form input[name=confirm]');
         if (!$usernameInput.val()) {
           alert("아이디를 입력해주세요.");
           $usernameInput.focus();
@@ -53,11 +52,6 @@
           $passwordInput2.focus();
           return false;
         }
-        if (!$displayname.val()) {
-          alert("이름을 입력해주세요.");
-          $displayname.focus();
-          return false;
-        }
         if ($passwordInput.val() !== $passwordInput2.val()) {
           alert("패스워드와 확인용패스워드를 똑같이 입력해주세요.");
           return false;
@@ -67,5 +61,4 @@
     });
   })();
 </script>
-
 {% endblock %}
