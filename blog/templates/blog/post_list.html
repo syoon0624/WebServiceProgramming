@@ -11,7 +11,7 @@
         <h4 class="card-header" style="padding: 15px; background-color: #e7f5ff;">{{ post.title}}</h5>
         <div class="card-body">
             <h6 class="card-title" style="color: #868e96;">작성일: {{ post.published_date }}</h5>
-            <span class="card-text" style="display:inline-block; max-width:400px; max-height: 100px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ post.text|linebreaksbr }}</span>
+            <span class="card-text" style="display:inline-block; max-width:400px; max-height: 100px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ post.text|safe }}</span>
             <br>
             <a href="{% url 'post_detail' pk=post.pk %}">댓글: {{ post.approved_comments.count }}</a>
             <div style="text-align: right;">
