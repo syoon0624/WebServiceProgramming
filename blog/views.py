@@ -21,6 +21,9 @@ def main_page(request):
     m_views = 'hello'
     return render(request, 'blog/main_page.html', {'views': m_views})
 
+def home_page(request):
+    return render(request, 'blog/home_page.html')
+
 @login_required
 def post_new(request):
     if request.method == "POST":
@@ -103,7 +106,7 @@ def signup(request):
             user = User.objects.create_user(username=request.POST['username'], password=request.POST['password'])
             # 로그인 한다
             auth.login(request, user)
-            return redirect('/')
+            return redirect('/home')
     # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
     return render(request, 'blog/signup.html')
 
@@ -122,7 +125,7 @@ def login(request):
         if user is not None:
             # 로그인 한다
             auth.login(request, user)
-            return redirect('/')
+            return redirect('/home')
         # 존재하지 않는다면
         else:
             # 딕셔너리에 에러메세지를 전달하고 다시 login.html 화면으로 돌아간다.
@@ -136,7 +139,7 @@ def logout(request):
     # logout으로 POST 요청이 들어왔을 때, 로그아웃 절차를 밟는다.
     if request.method == 'POST':
         auth.logout(request)
-        return redirect('/')
+        return redirect('/home')
 
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
     return render(request, 'blog/login.html')
