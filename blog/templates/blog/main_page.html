@@ -64,12 +64,12 @@
           </header>
     
           <div class="p-5 mb-4 bg-light rounded-3 blogimg2">
-            <div class="container-fluid py-5">
+            <div class="container-fluid py-5" style="position: relative;">
               <h1 class="display-5 fw-bold" style="color: white;">Show My Blog!</h1>
               <p class="col-md-8 fs-4" style="color: white;">게시글을 작성할 수 있는 블로그 페이지로 접속할 수 있습니다.</p>
               <a class="btn btn-outline-light btn-lg" href="{% url 'post_list' %}" type="button">들어가기</a>
               <div class="blog-img"></div>
-              <div style="position: absolute; top:17%; right: 10%; box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.4);">
+              <div style="position: absolute; top:0%; right: 0%; box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.4);">
                 <img class="blogimg" src="{% static 'blogimg.png' %}" />
               </div>
             </div>
