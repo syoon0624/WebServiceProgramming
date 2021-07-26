@@ -28,7 +28,10 @@
   {% if user.is_authenticated %}
     <ul class="nav" style="background-color: black;">
       <li class="nav-item">
-          <a class="nav-link" style="color: white;"> 반가워요, {{ user.username }} 님! </a>
+          <a class="nav-link" style="color: white;"> 반가워요, {{ user.last_name }} 님! </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" style="color: white;" href= "{% url 'mypage' %}">MyPage</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" style="color: white;" href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>

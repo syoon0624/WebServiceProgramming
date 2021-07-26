@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <div>
+    <div style="padding-top: 5%; padding-left: 5%;">
+      <h3 class="panel-title">회원수정</h3>
+    </div>
+    <div class="panel-body">
+      <form role="form" action="{% url 'mypage' %}" id="mypage_form" method="POST">
+        {% csrf_token %}
+        <fieldset>
+          <div class="w-100" style="padding-left: 5%; padding-right: 5%; margin-top: 10px;">
+            ID : {{user}}
+          </div>
+          <div class="w-100" style="padding-left: 5%; padding-right: 5%;padding-top: 3%; margin-top: 10px;">
+            성 : <input class="form-control" placeholder="First name" name="first_name" value="{{user.first_name}}" required="">
+          </div>
+          <div class="w-100" style="padding-left: 5%; padding-right: 5%;padding-top: 3%; margin-top: 10px;">
+            이름 : <input class="form-control" placeholder="Last name" name="last_name" value="{{user.last_name}}" required="">
+          </div>
+          <div class="w-100" style="padding-left: 5%; padding-right: 5%;padding-top: 3%; margin-top: 10px;">
+            이메일 : <input class="form-control" placeholder="E-mail" name="email" value="{{user.email}}" required="">
+          </div>
+          <!-- Change this to a button or input when using this as a form -->
+          <div class="d-grid gap-2 col-11 mx-auto p-2">
+            <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top: 10px; margin-bottom: 10px;"
+              value="수정하기">
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+{% endblock%}
