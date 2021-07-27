@@ -7,15 +7,6 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-def mypage(request):
-    if request.method == "POST":
-        user = request.user
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
-        user.email = request.POST['email']
-        user.save()
-        return redirect('/')
-    return render(request, 'blog/mypage.html')
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -152,3 +143,24 @@ def logout(request):
 
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
     return render(request, 'blog/login.html')
+
+# 회원 정보 수정
+def mypage(request):
+    if request.method == "POST":
+        user = request.user
+        user.first_name = request.POST['first_name']
+        user.last_name = request.POST['last_name']
+        user.email = request.POST['email']
+        user.save()
+        return redirect('/')
+    return render(request, 'blog/mypage.html')
+
+# 회원 탈퇴
+def member_del(request):
+    if request.method == "POST":
+        pw_del = request.POST["pw_del"]
+        user = request.user
+        if pw_del ==  user.password:
+            user.delete()
+            return redirect('/')
+    return render(request, 'blog/mypage.html')
