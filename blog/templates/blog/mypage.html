@@ -28,6 +28,29 @@
           </div>
         </fieldset>
       </form>
+      <div id="comment" style="margin-bottom: 30px;" class="container">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-default" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                aria-controls="collapseTwo">
+                <strong>회원 탈퇴하기</strong>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#comment">
+            <div class="card-body">
+              <form method="POST" action="{% url 'member_del' %}" class="post-form">
+                {% csrf_token %}
+                비밀번호 : <input type="password" class="form-control" name="pw_del" placeholder="비밀번호를 입력해주세요."/>
+                <div style="text-align: right; margin-top: 10px;">
+                  <button type="submit" class="btn btn-success">탈퇴</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock%}
