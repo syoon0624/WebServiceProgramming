@@ -159,8 +159,12 @@ def mypage(request):
 def member_del(request):
     if request.method == "POST":
         pw_del = request.POST["pw_del"]
-        user = request.user
-        if pw_del ==  user.password:
+         # 해당 username과 password와 일치하는 user 객체를 가져온다.
+        user = auth.authenticate(request, username=request.user, password=pw_del)
+        print(user)
+        # 해당 user 객체가 존재한다면
+        if user is not None:
+            # 로그인 한다
             user.delete()
-            return redirect('/')
+            return redirect('/home')
     return render(request, 'blog/mypage.html')
