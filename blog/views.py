@@ -6,6 +6,12 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from rest_framework import viewsets
+from .serializers import PostSerializer
+
+class PostView(viewsets.ModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
 
 
 def post_list(request):
