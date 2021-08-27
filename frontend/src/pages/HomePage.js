@@ -1,42 +1,75 @@
 import React, { useState } from 'react';
-import TextItem from './TextItem';
-import axios from 'axios';
+import styled, { keyframes } from 'styled-components';
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+const MotherContainer = styled.div`
+  background-color: #bac8ff;
+  height: 100%;
+`;
+
+const Background = styled.div`
+  padding: 50px;
+  background-image: url('img/background.png');
+  background-repeat: no-repeat;
+  height: 350px;
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+
+const Title = styled.a`
+  margin: 0 auto;
+  color: #ffe3e3;
+  font-size: 40px;
+`;
+
+const IntroButton = styled.button`
+  margin: 0 auto;
+  width: 50%;
+  line-height: 30px;
+  border: none;
+  background-color: #63e6be;
+  border-radius: 8px;
+  :hover {
+    cursor: pointer;
+    background-color: #20c997;
+  }
+`;
+
+const bounce = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.3)
+  }
+`;
+
+const BorderAnimation = styled.div`
+  position: absolute;
+  border: 10px solid black;
+  top: 50%;
+  left: 50%;
+  margin-top: -175px;
+  margin-left: -322px;
+  :hover {
+    animation: ${bounce} 1s;
+    transform: scale(1.3);
+  }
+`;
 
 const HomePage = () => {
-  const [state, setState] = useState([]);
-
-  const _handleChange = event => {
-    this.setState({ value: event.target.value });
-  };
-  const _handleSubmit = () => {
-    const { value } = state;
-    axios.post('/api/post/', { text: value }).then(res => _renderText());
-  };
-  const _renderText = () => {
-    axios.get('/api/post/').then(res => {
-      setState(res.data);
-    });
-  };
-
   return (
-    <div className="App">
-      <h1>OneLine App</h1>
-      <div>
-        <label>
-          Text:
-          <input type="text" value={state.value} onChange={_handleChange} />
-        </label>
-        <button onClick={_handleSubmit}>submit</button>
-        <button onClick={_renderText}>불러오기</button>
-      </div>
-      <h2>Long Text</h2>
-      {state.map((text, index) => {
-        return <TextItem text={text.text} key={index} id={text.id} />;
-      })}
-    </div>
+    <MotherContainer>
+      <BorderAnimation>
+        <Background>
+          <Title>
+            <h1>Yoon's Page</h1>
+          </Title>
+          <IntroButton>Go Blog!</IntroButton>
+        </Background>
+      </BorderAnimation>
+    </MotherContainer>
   );
 };
 
