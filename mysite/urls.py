@@ -26,6 +26,7 @@ class HomeTemplateView(TemplateView):
 
 router = routers.DefaultRouter()
 router.register('post', views.PostView, 'post')
+router.register('comment', views.CommentView, 'comment')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

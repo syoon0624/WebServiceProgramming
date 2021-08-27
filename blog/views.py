@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse, JsonResponse
 from django.utils import timezone
 from .models import Post, Comment
 from django.shortcuts import render,get_object_or_404,redirect
@@ -8,10 +9,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from rest_framework import viewsets
 from .serializers import PostSerializer
+from .serializers import CommentSerializer
 
 class PostView(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+
+class CommentView(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
 
 
 def post_list(request):
@@ -86,7 +92,8 @@ def add_comment_to_post(request, pk):
             comment.post = post
             comment.approve()
             comment.save()
-            return redirect('post_detail', pk=post.pk)
+            return HttpResponse(simplejson.dumps({"response":"Good"}))
+            #return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'blog/post_detail.html', {'form': form})

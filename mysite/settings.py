@@ -26,7 +26,7 @@ SECRET_KEY = 'pn1&3f8c)johx@%l4iuro4h!*1fn13zihs%302@o1*r+))tn%n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','.pythonanywhere.com']
 
 
 # Application definition
@@ -57,6 +57,7 @@ MIDDLEWARE = [
 #CORS 추가
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000',
+    'http://localhost:3000',
 ]
 
 CORS_ALLOW_CREDENTITALS = True
