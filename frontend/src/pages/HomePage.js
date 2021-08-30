@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const MotherContainer = styled.div`
   background-color: #bac8ff;
@@ -24,10 +25,9 @@ const Title = styled.a`
 `;
 
 const IntroButton = styled.button`
-  margin: 0 auto;
-  width: 50%;
   line-height: 30px;
   border: none;
+  width: 300px;
   background-color: #63e6be;
   border-radius: 8px;
   :hover {
@@ -58,6 +58,10 @@ const BorderAnimation = styled.div`
   }
 `;
 
+const SLink = styled(Link)`
+  margin: 0 auto;
+`;
+
 const HomePage = () => {
   return (
     <MotherContainer>
@@ -66,7 +70,9 @@ const HomePage = () => {
           <Title>
             <h1>Yoon's Page</h1>
           </Title>
-          <IntroButton>Go Blog!</IntroButton>
+          <SLink to="/blog">
+            <IntroButton>Go Blog!</IntroButton>
+          </SLink>
         </Background>
       </BorderAnimation>
     </MotherContainer>
