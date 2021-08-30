@@ -9,7 +9,7 @@ const MotherContainer = styled.div`
 
 const Background = styled.div`
   padding: 50px;
-  background-image: url('img/background.png');
+  background-image: url('static/background1.png');
   background-repeat: no-repeat;
   height: 350px;
   width: 640px;
