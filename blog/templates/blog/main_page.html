@@ -1,0 +1,113 @@
+{% load static %}
+    <!doctype html>
+    <html lang="en">
+    
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+      <meta name="generator" content="Hugo 0.83.1">
+      <title>Yoon's Blog</title>
+
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
+      
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+      <!--bootstrap js 추가 -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+      <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+    
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+        div.blogimg2 {
+          background-image: url("{% static 'blogimg2.png' %}");
+        }
+        img.blogimg{
+          width: 500px;
+        }
+        .github-img{
+          width: 150px;
+        }
+      </style>
+    
+    
+    </head>
+    
+    <body>
+    
+      <main>
+        <div class="container py-4">
+          <header class="pb-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+              <span class="fs-2"><strong>Yoon's Blog</strong></span>
+            </a>
+          </header>
+    
+          <div class="p-5 mb-4 bg-light rounded-3 blogimg2">
+            <div class="container-fluid py-5" style="position: relative;">
+              <h1 class="display-5 fw-bold" style="color: white;">Show My Blog!</h1>
+              <p class="col-md-8 fs-4" style="color: white;">게시글을 작성할 수 있는 블로그 페이지로 접속할 수 있습니다.</p>
+              <a class="btn btn-outline-light btn-lg" href="{% url 'post_list' %}" type="button">들어가기</a>
+              <div class="blog-img"></div>
+              <div style="position: absolute; top:0%; right: 0%; box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.4);">
+                <img class="blogimg" src="{% static 'blogimg.png' %}" />
+              </div>
+            </div>
+          </div>
+    
+          <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+              <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Yoon's Github</h2>
+                <div style="vertical-align: middle">
+                  <img class="github-img" style="float: left; margin-right: 10px;"src="{% static 'github.png' %}" />
+                  <div><strong>Id</strong> : syoon0624<br>
+                  <strong>Language</strong> : javascript, HTML, CSS, Python, C++<br>
+                  <strong>Usable stack</strong> : React.js, HTML5, Django framework, Node.js<br>
+                  <strong>Repositories</strong> : WebServiceProgramming, myCookBook, pymodi, ...
+                  </div><br><br>
+                </div>
+                <a href="https://github.com/syoon0624" class="btn btn-outline-light" type="button">살펴보기</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="h-100 p-5 bg-light border rounded-3">
+                <h2>Yoon's Profile</h2>
+                <img class="github-img" style="float: left; box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.4); margin-right: 10px;" src="{% static 'profile.png' %}" />
+                <h5><strong>이름 </strong> : 이승윤 <br>
+                <strong>생년월일 </strong> : 1996-06-24 <br><br>
+                <strong>Now</strong> : 경희대학교 컴퓨터공학과 4학년 <br>
+                <strong>분야</strong> : Frontend / Web Programming <br>
+                <strong>개발/공부중</strong> : React.js, Javascript ES6 ... <br>
+                <strong>Contact Me</strong> : syoon624@naver.com 또는 <br>
+                syoon0624@khu.ac.kr
+                </h5>
+              </div>
+            </div>
+          </div>
+    
+          <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; 2021 WebService Programming Project
+          </footer>
+        </div>
+      </main>

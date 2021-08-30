@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% block login %}
+<div class="w-25 border border-info border-3" style="position: absolute; left: 37%; top: 33%;">
+  <div>
+    <div style="padding-top: 5%; padding-left: 5%;">
+          <h3 class="panel-title">로그인</h3>
+        </div>
+          <div class="panel-body">
+            <form role="form" action="{% url 'login' %}" id="login_form" method="post">
+              {% csrf_token %}
+              <fieldset>
+                <div class="w-100" style="padding-left: 5%; padding-right: 5%;">
+                  <label for="login" class="form-label">ID</label>
+                  <input class="form-control" placeholder="ID" name="username" type="text" autofocus="" required="">
+                </div>
+                <div class="w-100 p-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input class="form-control" placeholder="Password" name="password" type="password" value=""
+                    required="">
+                </div>
+                <!-- Change this to a button or input when using this as a form -->
+                <div class="d-grid gap-2 col-11 mx-auto p-2" style="margin-bottom: 20px;">
+                  <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인">
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+  </div>
+</div>
+<script type="text/javascript">
+  (function () {
+    $(document).ready(function () {
+      $('#login_form').submit(function () {
+        var $usernameInput = $('#login_form input[name=username]');
+        var $passwordInput = $('#login_form input[name=password]');
+        if (!$usernameInput.val()) {
+          alert("아이디를 입력해주세요.");
+          $usernameInput.focus();
+          return false;
+        }
+        if (!$passwordInput.val()) {
+          alert("패스워드를 입력해주세요.");
+          $passwordInput.focus();
+          return false;
+        }
+        return true;
+      });
+    });
+  })();
+</script>
+{% endblock %}
