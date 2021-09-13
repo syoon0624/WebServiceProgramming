@@ -26,15 +26,15 @@ const boxFadeIn = keyframes`
 `;
 
 const Navbar = styled.div`
-  background-color: #060b26;
   height: 80px;
   display: flex;
+  border-bottom: 2px solid #868e96;
   justify-items: center;
   align-items: center;
   h1 {
     padding-left: 20px;
     font-size: 40px;
-    color: white;
+    color: #5c7cfa;
   }
 `;
 
@@ -60,6 +60,7 @@ const NavMenu = styled.nav`
 `;
 
 const NavMenuItems = styled.ul`
+  margin: 0;
   background-color: #060b26;
   width: 100%;
 `;
@@ -112,7 +113,7 @@ function Sidebar() {
   return (
     <>
       {/* 아이콘 컬러 전체 변경 기능 */}
-      <IconContext.Provider value={{ color: '#fff' }}>
+      <IconContext.Provider value={{ color: '#5c7cfa' }}>
         {/* 네비게이션 토글 코드*/}
         <Navbar>
           <SLink to="#">
